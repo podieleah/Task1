@@ -1,5 +1,5 @@
 pipeline {
-    agent any // Or specify a specific agent if needed
+    agent any
 
     stages {
         stage('Cleanup') {
@@ -8,21 +8,9 @@ pipeline {
             }
         }
 
-        stage('Build MySQL') {
-            steps {
-                sh './build_mysql.sh'
-            }
-        }
-
         stage('Build Flask') {
             steps {
                 sh './build_flask.sh'
-            }
-        }
-
-        stage('Run MySQL') {
-            steps {
-                sh './run_mysql.sh'
             }
         }
 
@@ -38,3 +26,4 @@ pipeline {
             }
         }
     }
+}

@@ -1,13 +1,15 @@
-#!/bin/bash
-sleep 5  # Give the app time to start
-
-# Improved test: Check for HTTP 200 OK
-STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5500)
-
-if [[ "$STATUS" == "200" ]]; then
-    echo "Flask app is running and accessible!"
-else
-    echo "Flask app test failed. Status code: $STATUS"
-    exit 1  # Fail the Jenkins build
-fi
-
+import requests
+import unittest
+ 
+class FlaskAppTests(unittest.TestCase):
+    BASE_URL = http://localhost:80
+ 
+    def test_home_page(self):
+        response = requests.get(f"{self.BASE_URL}/")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Hello QA", response.text)
+        self.assertIn("I'm currently running in", response.text)
+ 
+ 
+if __name__ == "__main__":
+    unittest.main()

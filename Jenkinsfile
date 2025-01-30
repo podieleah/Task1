@@ -28,8 +28,9 @@ pipeline {
         
         stage('Trivy Scan') {
             steps {
-                sh trivy image my-flask-app:latest --format json --output trivy_scan_results.json
-                archiveArtifacts artifacts: 'trivy_scan_results.json', allowEmptyArchive: true
+                sh '''
+                trivy image my-flask-app:latest --format json --output trivy_scan_results.json
+                archiveArtifacts artifacts: 'trivy_scan_results.json', allowEmptyArchive: true '''
             }
         }
     }
